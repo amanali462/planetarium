@@ -1,0 +1,3238 @@
+/* ========================================================================================
+ *
+ *   PAGE FRAMEWORK
+ *
+ *   code supplied by Ant Pearson (2021) for use in the LBU Interactive Media Design
+ *   module.  Page transition code is modified from Sitepoint book "Build Mobile websites
+ *   and apps for Smart Devices", Castledine, Eftos, Wheeler (2011)
+ *
+ * ======================================================================================== */
+
+
+/* body{
+	background-color: #333;
+	color: white;
+	font-family: 'PT Sans', cursive;
+} */
+
+/**
+ * main-container is the main page wrap.  It is a good place to put
+ * any content that you want to stay on screen at all times (ie sit
+ * above the pages and not animate with them)
+ */
+#main-container{
+	width: 1024px;
+	height: 768px;
+	margin: 0 auto;
+	overflow: hidden; /* stops content sat outside the bounds of the container being visible */
+	position: relative;
+}
+
+/**
+ * pages is the container that holds all the individual pages
+ */
+ .pages{
+    width: 1024px;
+    height: 768px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    
+}
+
+/**
+ * the > symbol means apply this style to TOP-LEVEL (first-child) div's of
+ * the container .pages i.e. all the individual pages.  Div's INSIDE of those
+ * individual pages don't get passed this rule because of the >
+ */
+.pages > div {
+  display:none;  /* hide the page */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  -webkit-backface-visibility: hidden; -webkit-perspective: 1000; /* helps items animate without error in mobile webkit browsers */
+}
+
+.pages > div.current{
+	display: block; /* turn the page visible if this is the current page */
+}
+
+/* ========================================================================================
+ *
+ *   Some quick general styles for the purpose of this example.  You can overwrite
+ *   these with styles of your own
+ */
+
+
+h1{
+	font-size: 3em;
+	margin: 1em;
+}
+
+/**
+ *  Below this point is where you would add your own css style rules for each of your pages.  The example has
+ *  been set up with 5 pages - an intro, menu page and 3 content pages.  You should alter this to fit your interactive, for
+ *  instance, you might decide not to have a menu page.
+ */
+
+/* ================================================================================================================*\
+
+	INTRO PAGE
+
+\* ================================================================================================================*/
+
+
+
+
+.page-intro{
+	height: 768px;
+	background-color: #BADA55;
+}
+
+/* @font-face {
+    font-family: 'Southern';
+    src: url('../fonts/logo-font/Southern-Regular.woff') format('woff'),
+        url('../fonts/logo-font/Southern-Regular.woff2') format('woff2');
+} */
+
+@font-face {
+  font-family: 'Southern';
+  src: url('../fonts/Southern-Regular.woff2') format('woff2'),
+      url('../fonts/Southern-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+/* ---------------------------------- Intro Page ------------------------------------- */
+
+
+/* ---------------------------------- Background Stars ------------------------------------- */
+#movingStars{
+    position: absolute;
+    height: 100%;
+    width: 100%; 
+    background: url(../images/intro-page/stars-backdrop.png);
+    background-repeat: repeat;
+    background-position: 0 0;
+    background-size: auto 100%;
+    animation: movingStars 500s linear infinite;
+}
+
+@keyframes movingStars  {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 10000px 0;
+    }
+}
+
+
+/* ---------------------------------- Volume Toggle ------------------------------------- */
+
+.volume-button-toggle{
+    width: 56px; height: 54px;
+    background: url(../images/intro-page/volume-button-toggle.svg);
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+    z-index: 100;
+
+}
+
+.volume-on{
+    background-position: 0px -55px;
+    z-index: 100;
+}
+
+
+
+
+/* ---------------------------------- Planetarium Text ------------------------------------- */
+.page-intro .logo h1{
+    position: absolute;
+    left: 180px;
+    top:110px;
+    color: white;
+    font-family: Southern;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 60px;
+    color: #066954;
+    -webkit-text-stroke: 1px white;
+    animation: planetariumScale 1s ease forwards ;
+    opacity: 0%;
+    animation-delay: .5s;
+}
+
+@keyframes planetariumScale{
+    0%{
+        transform: scale(0);
+        opacity: 0%;
+    }
+
+    50%{
+        transform: scale(1.2);
+    }
+
+    100%{
+        transform: scale(1);
+        opacity: 100%;
+    }
+}
+
+/* ---------------------------------- Planetarium Dome ------------------------------------- */
+
+
+.planetarium-dome{
+    background: url(../images/intro-page/planetarium-dome.png);
+    width: 500px; height: 500px;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 260px;
+    top:300px;
+    background-size: contain;
+}
+ .planetarium-without-doors{
+    background: url(../images/intro-page/planetarium-without-doors.png);
+    width: 500px; height: 500px;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 260px;
+    top:300px;   
+    background-size: contain;
+}
+
+
+.planetarium-zoom{
+
+    transform: scale(4.3);
+    position: absolute;
+    transition: 2s ease-in-out;
+    top: 600px;
+    left: 200px;
+}
+
+
+/* ---------------------------------- Door Animation ------------------------------------- */
+.hide-doors{
+    opacity: 0;
+}
+
+.left-door{
+    background: url(../images/intro-page/slide-door-left.png);
+    width:400px; height: 399px;
+    position: absolute;
+    background-repeat: no-repeat;
+    top: 363px;
+    left: 292px; 
+    background-size: contain;
+    
+    
+}
+
+.slide-door-left{
+    animation: slide-door-left 1s forwards linear;
+    animation-delay: 2.5s;
+    
+}
+
+@keyframes slide-door-left{
+    0%{
+        left: 292px;
+    }
+
+    100%{
+        left: 80px;
+    }
+}
+
+.right-door{
+    background: url(../images/intro-page/slide-door-right.png);
+    width:400px; height: 399px;
+    position: absolute;
+    background-repeat: no-repeat;
+    top: 363px;
+    left: 513px;
+    background-size: contain;
+}
+
+.slide-door-right{
+    animation: slide-door-right 1s forwards linear;
+    animation-delay: 2.5s;
+}
+
+@keyframes slide-door-right{
+    0%{
+        left: 511.9px;
+    }
+
+    100%{
+        left: 727px;
+    }
+}
+
+
+/* ---------------------------------- Earth Rotation ------------------------------------- */
+.earth-intro{
+    background: url(../images/intro-page/earth-intro.svg);
+    position: absolute;
+    width: 1100px; height: 1100px;
+    top: 133%;
+    left: 50%;
+    animation: earthRotate 150s infinite linear;
+    background-repeat: no-repeat;
+
+    
+}
+@keyframes earthRotate{
+    0%{
+        transform: translate(-50%, -50%) rotate(0deg);
+        
+    }
+
+    100%{
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+
+    
+}
+/* ---------------------------------- Start Button ------------------------------------- */
+.page-intro .intro-button{
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    position: absolute;
+    bottom: 50px;
+    left: 425px;
+    transform: translate(-50%, -50%);
+    text-transform: uppercase;
+    font-size: 50px;
+    padding: 0px 27px;
+    border: 2px solid white;
+    border-radius: 13px;
+    animation: zoomStart 1s ease infinite;
+    cursor: pointer;
+    
+}
+
+
+@keyframes zoomStart {
+    0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+}
+
+
+/* ================================================================================================================*\
+
+	MENU PAGE
+
+\* ================================================================================================================*/
+
+.page-menu .control-centre{
+    background: url(../images/main-menu/control-centre.png);
+    position: absolute;
+    width: 1024px; height: 768px;
+
+
+}
+
+/* GAME SCREENS */
+
+.game-1{
+  background: url(../images/main-menu/mission-1.png);
+  position: absolute;
+  width: 231px; height: 288px ;
+  top: 110px;
+  left: 25px;
+  cursor: pointer;
+}
+
+.game-1 h2{
+    position: absolute;
+    top: -35px;
+    left: 45px;
+    font-size: 16px;
+    font-family: Southern;
+    color: #00983a;
+    border: 6px solid white;
+    border-radius: 10px;
+    background-color: black;
+    padding: 10px;
+    
+}
+
+.missions-scaled{
+  animation: missions-scaled 1s ease-in-out forwards;
+  animation-delay: 12s;
+}
+
+@keyframes missions-scaled{
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.game-2{
+  background: url(../images/main-menu/mission-2.png);
+  position: absolute;
+  width: 231px; height: 288px ;
+  top: 110px;
+  right: 25px;
+  cursor: pointer;
+}
+
+.game-2 h2{
+    position: absolute;
+    top: -35px;
+    right: 45px;
+    font-size: 16px;
+    font-family: Southern;
+    color: #00983a;
+    border: 6px solid white;
+    border-radius: 10px;
+    background-color: black;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* MIDDLE MONITOR SCREEN */
+.screen-text{  
+    font-size: 15px;
+    text-align: left;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+}
+
+.screen-text-page1{
+    position: absolute;
+    width: 400px;
+    line-height: 20px;
+    top: 155px;
+    left: 310px;
+  
+}
+
+.screen-text-page2{
+    position: absolute;
+    width: 400px;
+    line-height: 20px;
+    top: 155px;
+    left: 310px;
+    display: block;
+    opacity: 1;
+}
+
+
+.middle-screen p{
+   
+    margin: 0;
+}
+
+.screen-text-page3{
+   
+    position: absolute;
+    width: 400px;
+    line-height: 20px;
+    top: 155px;
+    left: 310px;
+ 
+}
+
+.screen-text-page4{
+   
+  position: absolute;
+  width: 400px;
+  line-height: 20px;
+  top: 155px;
+  left: 310px;
+
+}
+
+.screen-text-page5{
+   
+  position: absolute;
+  width: 400px;
+  line-height: 20px;
+  top: 155px;
+  left: 310px;
+
+}
+
+.screen-text-page6{
+   
+  position: absolute;
+  width: 400px;
+  line-height: 20px;
+  top: 155px;
+  left: 310px;
+
+  
+}
+
+/* SCREEN TEXT PAGE 1 */
+
+.screen-text-button-page1{
+  position: absolute;
+  top: 290px;
+  left: 490px;
+  color: white;
+  font-size: 18px;
+  border: 1px solid white;
+  border-radius: 6px;
+  padding: 5px 15px;
+}
+
+.screen-text-page1 p {
+  border-right: .15em solid #00983a;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.screen-text-page1 p:nth-child(1) {
+  width: 390px;
+  animation: page1type 3s steps(40, end);
+  animation-fill-mode: forwards;
+}
+
+.screen-text-page1 p:nth-child(2) {
+  width: 370px;
+  opacity: 0;
+  animation: page1type2 3s steps(40, end);
+  animation-delay: 3s;
+  animation-fill-mode: forwards;
+}
+
+.screen-text-page1 p:nth-child(3) {
+  width: 350px;
+  opacity: 0;
+  animation: page1type3 3s steps(40, end);
+  animation-delay: 6s;
+  animation-fill-mode: forwards;
+}
+
+.screen-text-page1 p:nth-child(4) {
+  width: 280px;
+  opacity: 0;
+  animation: page1type4 3s steps(40, end), blink .5s step-end infinite alternate;
+  animation-delay: 9s;
+  animation-fill-mode: forwards;
+}
+
+  /* PAGE 1 TYPEWRITER EFFECT ANIMATION */
+
+  
+  @keyframes page1type {
+    0% {
+      width: 0;
+    }
+    99.9% {
+      border-right: .15em solid #00983a;
+    }
+    100% {
+      border: none;
+    }
+  }
+  
+  
+  @keyframes page1type2 {
+    0% {
+      width: 0;
+    }
+    1% {
+      opacity: 1;
+    }
+    99.9% {
+        border-right: .15em solid #00983a;
+    }
+    100% {
+      opacity: 1;
+      border: none;
+    }
+  }
+
+  @keyframes page1type3 {
+    0% {
+      width: 0;
+    }
+    1% {
+      opacity: 1;
+    }
+    99.9% {
+        border-right: .15em solid #00983a;
+    }
+    100% {
+      opacity: 1;
+      border: none;
+    }
+  }
+
+  @keyframes page1type4 {
+    0% {
+      width: 0;
+    }
+    1% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  
+  
+  
+  @keyframes blink {
+    50% {
+      border-color: transparent;
+    }
+  }
+
+  /* SCREEN TEXT PAGE 1 BUTTON ANIMATION */
+  .screen-text-button-page1{
+    position: absolute;
+    top: 290px;
+    left: 480px;
+    color: white;
+    font-size: 18px;
+    border: 1px solid white;
+    border-radius: 6px;
+    padding: 5px 15px;
+    text-align: center;
+    cursor: pointer;
+    display: none;
+  }
+  
+
+
+/* SCREEN TEXT PAGE 2 TYPEWRITER EFFECT ANIMATION */
+
+.screen-text-page2 p {
+    border-right: .15em solid #00983a;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .screen-text-page2 p:nth-child(1) {
+    width: 380px;
+    animation: page2type 3s steps(40, end);
+    animation-fill-mode: forwards;
+  }
+  
+  .screen-text-page2 p:nth-child(2) {
+    width: 350px;
+    opacity: 0;
+    animation: page2type2 3s steps(40, end);
+    animation-delay: 3s;
+    animation-fill-mode: forwards;
+  }
+
+  .screen-text-page2 p:nth-child(3) {
+    width: 350px;
+    opacity: 0;
+    animation: page2type3 3s steps(40, end);
+    animation-delay: 6s;
+    animation-fill-mode: forwards;
+  }
+
+  .screen-text-page2 p:nth-child(4) {
+    width: 420px;
+    opacity: 0;
+    animation: page2type4 3s steps(40, end);
+    animation-delay: 9s;
+    animation-fill-mode: forwards;
+  }
+
+  .screen-text-page2 p:nth-child(5) {
+    width: 370px;
+    opacity: 0;
+    animation: page2type5 3s steps(40, end);
+    animation-delay: 12s;
+    animation-fill-mode: forwards;
+  }
+
+  .screen-text-page2 p:nth-child(6) {
+    width: 265px;
+    opacity: 0;
+    animation: page2type6 3s steps(40, end), blink .5s step-end infinite alternate;
+    animation-delay: 15s;
+    animation-fill-mode: forwards;
+  }
+  
+
+
+  /* PAGE 2 TYPEWRITER EFFECT ANIMATION */
+
+  
+  @keyframes page2type {
+    0% {
+      width: 0;
+    }
+    99.9% {
+      border-right: .15em solid #00983a;
+    }
+    100% {
+      border: none;
+    }
+  }
+  
+  
+  @keyframes page2type2 {
+    0% {
+      width: 0;
+    }
+    1% {
+      opacity: 1;
+    }
+    99.9% {
+        border-right: .15em solid #00983a;
+    }
+    100% {
+      opacity: 1;
+      border: none;
+    }
+  }
+
+  @keyframes page2type3 {
+    0% {
+      width: 0;
+    }
+    1% {
+      opacity: 1;
+    }
+    99.9% {
+        border-right: .15em solid #00983a;
+    }
+    100% {
+      opacity: 1;
+      border: none;
+    }
+  }
+
+  @keyframes page2type4 {
+    0% {
+      width: 0;
+    }
+    1% {
+      opacity: 1;
+    }
+    99.9% {
+        border-right: .15em solid #00983a;
+    }
+    100% {
+      opacity: 1;
+      border: none;
+    }
+  }
+
+  @keyframes page2type5 {
+    0% {
+      width: 0;
+    }
+    1% {
+      opacity: 1;
+    }
+    99.9% {
+        border-right: .15em solid #00983a;
+    }
+    100% {
+      opacity: 1;
+      border: none;
+    }
+  }
+
+  @keyframes page2type6 {
+    0% {
+        width: 0;
+      }
+      1% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+  
+  
+  
+  @keyframes blink {
+    50% {
+      border-color: transparent;
+    }
+  }
+
+    /* SCREEN TEXT PAGE 2 BUTTON ANIMATION */
+
+    .screen-text-button-page2{
+      position: absolute;
+      top: 290px;
+      left: 480px;
+      color: white;
+      font-size: 18px;
+      border: 1px solid white;
+      border-radius: 6px;
+      padding: 5px 15px;
+      cursor: pointer;
+      display: none;
+    }
+    
+
+  
+
+
+  /* SCREEN TEXT PAGE 3 */
+
+  .screen-text-page3 p {
+    border-right: .15em solid #00983a;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .screen-text-page3 p:nth-child(1) {
+    width: 400px;
+    animation: page3type 3s steps(40, end);
+    animation-fill-mode: forwards;
+  }
+  
+  .screen-text-page3 p:nth-child(2) {
+    width: 400px;
+    opacity: 0;
+    animation: page3type2 3s steps(40, end);
+    animation-delay: 3s;
+    animation-fill-mode: forwards;
+  }
+  
+  .screen-text-page3 p:nth-child(3) {
+    width: 380px;
+    opacity: 0;
+    animation: page3type3 3s steps(40, end);
+    animation-delay: 6s;
+    animation-fill-mode: forwards;
+  }
+  
+  .screen-text-page3 p:nth-child(4) {
+    width: 95px;
+    opacity: 0;
+    animation: page3type4 1s steps(40, end), blink .5s step-end infinite alternate;
+    animation-delay: 9s;
+    animation-fill-mode: forwards;
+  }
+  
+    /* PAGE 3 TYPEWRITER EFFECT ANIMATION */
+  
+    
+    @keyframes page3type {
+      0% {
+        width: 0;
+      }
+      99.9% {
+        border-right: .15em solid #00983a;
+      }
+      100% {
+        border: none;
+      }
+    }
+    
+    
+    @keyframes page3type2 {
+      0% {
+        width: 0;
+      }
+      1% {
+        opacity: 1;
+      }
+      99.9% {
+          border-right: .15em solid #00983a;
+      }
+      100% {
+        opacity: 1;
+        border: none;
+      }
+    }
+  
+    @keyframes page3type3 {
+      0% {
+        width: 0;
+      }
+      1% {
+        opacity: 1;
+      }
+      99.9% {
+          border-right: .15em solid #00983a;
+      }
+      100% {
+        opacity: 1;
+        border: none;
+      }
+    }
+  
+    @keyframes page3type4 {
+      0% {
+        width: 0;
+      }
+      1% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    
+    
+    
+    
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
+  
+    
+    
+    /* SCREEN TEXT PAGE 4 */
+
+    .screen-text-page4 p {
+      border-right: .15em solid #00983a;
+      white-space: nowrap;
+      overflow: hidden;
+      
+    }
+    .screen-text-page4 p:nth-child(1) {
+      width: 400px;
+      animation: page4type 3s steps(40, end);
+      animation-fill-mode: forwards;
+    }
+    
+    .screen-text-page4 p:nth-child(2) {
+      width: 400px;
+      opacity: 0;
+      animation: page4type2 3s steps(40, end);
+      animation-delay: 3s;
+      animation-fill-mode: forwards;
+    }
+    
+    .screen-text-page4 p:nth-child(3) {
+      width: 380px;
+      opacity: 0;
+      animation: page4type3 3s steps(40, end);
+      animation-delay: 6s;
+      animation-fill-mode: forwards;
+    }
+
+    .screen-text-page4 p:nth-child(4) {
+      width: 350px;
+      opacity: 0;
+      animation: page4type4 3s steps(40, end);
+      animation-delay: 9s;
+      animation-fill-mode: forwards;
+    }
+    
+    .screen-text-page4 p:nth-child(5) {
+      width: 350px;
+      opacity: 0;
+      animation: page4type5 3s steps(40, end);
+      animation-delay: 12s;
+      animation-fill-mode: forwards;
+    }
+    .screen-text-page4 p:nth-child(6) {
+      width: 225px;
+      opacity: 0;
+      animation: page4type6 3s steps(40, end), blink .5s step-end infinite alternate;
+      animation-delay: 15s;
+      animation-fill-mode: forwards;
+    }
+    
+      
+    /* PAGE 4 TYPEWRITER EFFECT ANIMATION */
+    
+      
+      @keyframes page4type {
+        0% {
+          width: 0;
+        }
+        99.9% {
+          border-right: .15em solid #00983a;
+        }
+        100% {
+          border: none;
+        }
+      }
+      
+      
+      @keyframes page4type2 {
+        0% {
+          width: 0;
+        }
+        1% {
+          opacity: 1;
+        }
+        99.9% {
+            border-right: .15em solid #00983a;
+        }
+        100% {
+          opacity: 1;
+          border: none;
+        }
+      }
+    
+      @keyframes page4type3 {
+        0% {
+          width: 0;
+        }
+        1% {
+          opacity: 1;
+        }
+        99.9% {
+            border-right: .15em solid #00983a;
+        }
+        100% {
+          opacity: 1;
+          border: none;
+        }
+      }
+
+      @keyframes page4type4 {
+        0% {
+          width: 0;
+        }
+        1% {
+          opacity: 1;
+        }
+        99.9% {
+            border-right: .15em solid #00983a;
+        }
+        100% {
+          opacity: 1;
+          border: none;
+        }
+      }
+
+      @keyframes page4type5 {
+        0% {
+          width: 0;
+        }
+        1% {
+          opacity: 1;
+        }
+        99.9% {
+            border-right: .15em solid #00983a;
+        }
+        100% {
+          opacity: 1;
+          border: none;
+        }
+      }
+    
+      @keyframes page4type6 {
+        0% {
+          width: 0;
+        }
+        1% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      
+      
+      
+      
+      @keyframes blink {
+        50% {
+          border-color: transparent;
+        }
+      }
+
+      
+      /* SCREEN TEXT PAGE 5 */
+
+    .screen-text-page5 p {
+      border-right: .15em solid #00983a;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .screen-text-page5 p:nth-child(1) {
+      width: 400px;
+      animation: page5type 3s steps(40, end);
+      animation-fill-mode: forwards;
+    }
+    
+    .screen-text-page5 p:nth-child(2) {
+      width: 240px;
+      opacity: 0;
+      animation: page5type2 3s steps(40, end), blink .5s step-end infinite alternate;
+      animation-delay: 3s;
+      animation-fill-mode: forwards;
+    }
+    
+      
+    /* PAGE 5 TYPEWRITER EFFECT ANIMATION */
+    
+      
+      @keyframes page5type {
+        0% {
+          width: 0;
+        }
+        99.9% {
+          border-right: .15em solid #00983a;
+        }
+        100% {
+          border: none;
+        }
+      }
+    
+    
+      @keyframes page5type2 {
+        0% {
+          width: 0;
+        }
+        1% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      
+      
+      
+      
+      @keyframes blink {
+        50% {
+          border-color: transparent;
+        }
+      }
+
+      
+      /* SCREEN TEXT PAGE 6 */
+
+    .screen-text-page6 p {
+      border-right: .15em solid #00983a;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .screen-text-page6 p:nth-child(1) {
+      width: 400px;
+      animation: page6type 3s steps(40, end);
+      animation-fill-mode: forwards;
+    }
+    
+    .screen-text-page6 p:nth-child(2) {
+      width: 240px;
+      opacity: 0;
+      animation: page6type2 3s steps(40, end), blink .5s step-end infinite alternate;
+      animation-delay: 3s;
+      animation-fill-mode: forwards;
+    }
+    
+      
+    /* PAGE 5 TYPEWRITER EFFECT ANIMATION */
+    
+      
+      @keyframes page6type {
+        0% {
+          width: 0;
+        }
+        99.9% {
+          border-right: .15em solid #00983a;
+        }
+        100% {
+          border: none;
+        }
+      }
+    
+    
+      @keyframes page6type2 {
+        0% {
+          width: 0;
+        }
+        1% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      
+      
+      
+      
+      @keyframes blink {
+        50% {
+          border-color: transparent;
+        }
+      }
+
+    /* Tablet */
+
+    .tablet{
+      background: url(../images/main-menu/tablet.png);
+      background-repeat: no-repeat;
+      position: absolute;
+      width: 200px; 
+      height: 105px;
+      top: 430px;
+      left: 250px;
+      transform: rotate(-20deg);
+      cursor: pointer;
+      
+    }
+
+    /* TABLET SHAKE ANIMATION */
+    
+  
+    .tablet-shake{
+      animation: shake 1s infinite; 
+      background-position: 0 -108px;
+   
+
+   
+    }
+
+    @keyframes shake {
+      0% { transform: translate(1px, 1px) rotate(-20deg); }
+      10% { transform: translate(0px, 0px) rotate(-21deg); }
+      20% { transform: translate(1px, 1px) rotate(-19deg); }
+      30% { transform: translate(0px, 0px) rotate(-20deg); }
+      40% { transform: translate(1px, 1px) rotate(-21deg); }
+      50% { transform: translate(0px, 0px) rotate(-19deg); }
+      60% { transform: translate(1px, 1px) rotate(-20deg); }
+      70% { transform: translate(0px, 0px) rotate(-21deg); }
+      80% { transform: translate(1px, 1px) rotate(-19deg); }
+      90% { transform: translate(0px, 0px) rotate(-20deg); }
+      100% { transform: translate(1px, 1px) rotate(-21deg); }
+    }
+
+    .badges h2{
+      position: absolute;
+      color: white;
+      font-family: Southern;
+      font-size: 25px;
+      left: 370px;
+      top: 700px;
+      opacity: 0;
+      animation: opacity 1s ease-in-out forwards;
+      animation-delay: 6s;
+    }
+  
+
+
+    .badges .badge-one{
+      position: absolute;
+      background: url(../images/main-menu/badge-one.png);
+      width: 76px;
+      height: 75px;
+      left: 375px;
+      top: 625px;
+      opacity: 0;
+      animation: opacity 1s ease-in-out forwards;
+      animation-delay: 6s;
+    }
+    
+    .badges .badge-two{
+      position: absolute;
+      background: url(../images/main-menu/badge-two.png);
+      width: 76px;
+      height: 75px;
+      left: 475px;
+      top: 625px;
+      opacity: 0;
+      animation: opacity 1s ease-in-out forwards;
+      animation-delay: 6s;
+    }
+    
+    .badges .badge-three{
+      position: absolute;
+      background: url(../images/main-menu/badge-three.png);
+      width: 76px;
+      height: 75px;
+      left: 575px;
+      top: 625px;
+      opacity: 0;
+      animation: opacity 1s ease-in-out forwards;
+      animation-delay: 6s;
+    }
+    
+    @keyframes opacity{
+    
+      0%{
+        opacity: 0;
+      }
+    
+      100%{
+        opacity: 1;
+      }
+    }
+  
+
+
+    .show-badges .space-badges-text{
+      position: absolute;
+      color: white;
+      font-family: Southern;
+      font-size: 25px;
+      left: 380px;
+      top: 715px;
+      display: none;
+    }
+  
+
+
+    .show-badges .show-badge-one{
+      position: absolute;
+      background: url(../images/main-menu/learning-badge.png);
+      width: 76px;
+      height: 75px;
+      left: 375px;
+      top: 625px;
+      animation: revealBadge .5s ease-in-out forwards;
+      animation-delay: .5s;
+      transform: scale(0);
+    }
+
+    @keyframes revealBadge {
+      0%{
+        transform: scale(0);
+      }
+
+      50%{
+        transform:scale(1.3)
+      }
+
+      100%{
+        transform: scale(1);
+  
+      }
+    }
+    
+    .show-badges .show-badge-two{
+      position: absolute;
+      background: url(../images/main-menu/mission-1-badge.png);
+      width: 76px;
+      height: 75px;
+      left: 475px;
+      top: 625px;
+      animation: revealBadge .5s ease-in-out forwards;
+      animation-delay: .5s;
+      transform: scale(0);
+    }
+    
+    .show-badges .show-badge-three{
+      position: absolute;
+      background: url(../images/main-menu/mission-2-badge.png);
+      width: 76px;
+      height: 75px;
+      left: 575px;
+      top: 625px;
+      animation: revealBadge .5s ease-in-out forwards;
+      animation-delay: .5s;
+      transform: scale(0);
+    }
+
+    
+    .badges-locked .badge-one-locked{
+      position: absolute;
+      background: url(../images/main-menu/badge-one.png);
+      width: 76px;
+      height: 75px;
+      left: 375px;
+      top: 625px;
+      display: none;
+    }
+    
+    .badges-locked .badge-two-locked{
+      position: absolute;
+      background: url(../images/main-menu/badge-two.png);
+      width: 76px;
+      height: 75px;
+      left: 475px;
+      top: 625px;
+      display: none;
+    }
+    
+    .badges-locked .badge-three-locked{
+      position: absolute;
+      background: url(../images/main-menu/badge-three.png);
+      width: 76px;
+      height: 75px;
+      left: 575px;
+      top: 625px;
+      display: none;
+    }
+    
+
+/* ================================================================================================================*\
+
+LOADING SCREEN
+
+\* ================================================================================================================*/
+    
+
+.stars-background{
+  background: url(../images/intro-page/stars-backdrop.png);
+  width: 1024px; height: 768px;
+  position: absolute;
+  background-position: 0 0;
+  background-size: auto 100%;
+  animation: loadingScreenStars 20s linear infinite;
+  animation-delay: .5s;
+}
+
+
+
+
+@keyframes loadingScreenStars {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0px 10000px;
+    }
+}
+
+
+.rocket{
+  background: url(../images/loading-screen/rocket.png);
+  position: absolute;
+  width: 226px;; height: 331px;
+  top: 300px;  
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.rocket-fire{
+  background: url(../images/loading-screen/rocket-fire.png);
+  position: absolute;
+  width:117px; height:730px;
+  top: 750px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+}
+
+.loader{
+  position: absolute;
+  color: white;
+  font-family: "Comic Sans MS";
+  text-transform: uppercase;
+  font-size: 24px;
+  transform: rotate(-90deg);
+  top: 335px;
+  left:108px;
+  animation: loadReveal 2s forwards;
+}
+
+@keyframes loaderDots {50% { color: transparent }}
+.loader__dot{ animation: 1s loaderDots infinite }
+.loader__dot_two{ animation-delay: 250ms }
+.loader__dot_three{ animation-delay: 500ms }
+
+@keyframes loadReveal{
+  0%{
+    opacity: 0;
+  }
+
+  100%{
+    opacity: 1;
+  }
+}
+
+.loading{
+  width: 100%;
+  height: auto;
+  position: absolute;
+  transform: rotate(-90deg);
+  left: -250px;
+  top: 120px;
+}
+
+.loading .line-box{
+  padding: 2px;
+  width: 55%;
+  height: 40px;
+  border: 2px solid white;
+  border-radius:22px;
+}
+
+.loading .line-box .line{
+  height: 40px;
+  border-radius: 20px;
+  background-image: linear-gradient(-90deg, #fbba3f, #d10d0d);
+  animation: loading 5s forwards;
+}
+
+@keyframes loading{
+  0%{
+    width: 0%;
+  }
+
+  100%{
+    width: 100%;
+  }
+}
+
+
+
+/* ================================================================================================================*\
+
+LEARNING PAGE
+
+\* ================================================================================================================*/
+
+
+.page-learning{
+  background: url(../images/learning-page/stars-backdrop.png);
+  width: 1024px; height: 768px;
+  position: absolute;
+  background-repeat: repeat;
+  background-position: 0 0;
+  background-size: auto 100%;
+
+
+}
+
+
+
+
+.planet{
+  position: absolute;
+  top: 250px; 
+}
+
+.planet-mercury{
+  background: url(../images/learning-page/planets/mercury.png);
+  width: 92px; height: 122px;
+  left: 50px; 
+  top: 315px;
+}
+
+.planet-venus{
+  background: url(../images/learning-page/planets/venus.png);
+  width: 72px; height: 121px;
+  left: 140px;
+  top: 320px;
+}
+
+.planet-earth{
+  background: url(../images/learning-page/planets/earth.png);
+  width: 91px; height: 121px;
+  left: 225px; 
+  top: 315px;
+}
+
+.planet-mars{
+  background: url(../images/learning-page/planets/mars.png);
+  width: 71px; height: 121px;
+  left: 325px;
+  top: 315px;
+}
+
+.planet-jupiter{
+  background: url(../images/learning-page/planets/jupiter.png);
+  width: 165px; height: 215px;
+  left: 400px; 
+}
+
+.planet-saturn{
+  background: url(../images/learning-page/planets/saturn.png);
+  width: 183px; height: 215px;
+  left: 560px; 
+}
+
+.planet-uranus{
+  background: url(../images/learning-page/planets/uranus.png);
+  width: 113px; height: 185px;
+  left: 740px; 
+}
+
+.planet-neptune{
+  background: url(../images/learning-page/planets/neptune.png);
+  width: 124px; height: 185px;
+  right: 50px; 
+}
+
+.planet-info {
+  color: white;
+  font-size: 12px;
+  font-family:'Courier New', Courier, monospace;
+  text-transform: uppercase;
+  position: absolute;
+}
+
+
+
+.page-learning-instructions p{
+  position: absolute;
+  top: 575px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  text-transform: uppercase;
+  font-size: 36px;
+  text-align: center;
+}
+
+.page-learning-instructions2 p{
+  position: absolute;
+  top: 575px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  text-transform: uppercase;
+  font-size: 36px;
+  text-align: center;
+  width: 900px;
+  display: none;
+  
+}
+
+.planet-mercury .planet-info{
+  top: 100px;
+  left: 22px;
+}
+
+.planet-venus .planet-info{
+  top: 95px;
+  left: 19px;
+}
+
+.planet-earth .planet-info{
+  top: 105px;
+  left: 28px;
+}
+
+.planet-mars .planet-info{
+  top: 92px;
+  left: 22px;
+}
+
+.planet-jupiter .planet-info{
+  top: 185px;
+  left: 55px;
+}
+
+.planet-saturn .planet-info{
+  top: 170px;
+  left: 67px;
+}
+
+.planet-uranus .planet-info{
+  top: 145px;
+  left: 34px;
+}
+
+.planet-neptune .planet-info{
+  top: 145px;
+  left: 35px;
+}
+
+.planetarium-dome-icon{
+  background: url(../images/learning-page/planetarium-dome-small.png);
+  width:110px;
+  height:55px;
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  display: none;
+  animation: fadein 1s ease-in-out;
+}
+
+.planetarium-dome-icon-start{
+  background: url(../images/learning-page/planetarium-dome-small.png);
+  width:110px;
+  height:55px;
+  position: absolute;
+  left: 25px;
+  top: 25px;
+
+}
+
+
+
+/* ================================================================================================================*\
+
+LEARNING PAGE- MERCURY
+
+\* ================================================================================================================*/
+
+.page-learning-mercury{
+  background: url(../images/intro-page/stars-backdrop.png);
+  width: 1024px; height: 768px;
+}
+
+.page-learning-venus{
+  background: url(../images/intro-page/stars-backdrop.png);
+  width: 1024px; height: 768px;
+}
+
+.page-learning-earth{
+  background: url(../images/intro-page/stars-backdrop.png);
+  width: 1024px; height: 768px;
+}
+
+.page-learning-mars{
+  background: url(../images/intro-page/stars-backdrop.png);
+  width: 1024px; height: 768px;
+}
+
+.page-learning-jupiter{
+  background: url(../images/intro-page/stars-backdrop.png);
+  width: 1024px; height: 768px;
+}
+
+.page-learning-saturn{
+  background: url(../images/intro-page/stars-backdrop.png);
+  width: 1024px; height: 768px;
+}
+
+.page-learning-uranus{
+  background: url(../images/intro-page/stars-backdrop.png);
+  width: 1024px; height: 768px;
+}
+
+.page-learning-neptune{
+  background: url(../images/intro-page/stars-backdrop.png);
+  width: 1024px; height: 768px;
+}
+
+
+
+
+
+/* Left Hand Side */
+#mercury{
+  background: url(../images/game1/mercury.png);
+  width: 500px; height: 500px;
+  background-repeat: no-repeat;
+  position: absolute;
+  transform: scale(.8);
+  top: 190px;
+  left: 30px; 
+}
+
+#venus{
+  background: url(../images/game1/venus.png);
+  width: 500px; height: 500px;
+  background-repeat: no-repeat;
+  position: absolute;
+  transform: scale(.8);
+  top: 190px;
+  left: 15px; 
+}
+
+#earth{
+  background: url(../images/game1/earth.png);
+  width: 500px; height: 500px;
+  background-repeat: no-repeat;
+  position: absolute;
+  transform: scale(.75);
+  top: 160px;
+  left: -20px; 
+}
+
+#mars{
+  background: url(../images/game1/mars.png);
+  width: 500px; height: 500px;
+  background-repeat: no-repeat;
+  position: absolute;
+  transform: scale(.8);
+  top: 190px;
+  left: 20px; 
+}
+
+#jupiter{
+  background: url(../images/game1/jupiter.png);
+  width: 500px; height: 500px;
+  background-repeat: no-repeat;
+  position: absolute;
+  transform: scale(.7);
+  top: 150px;
+  left: -40px; 
+}
+
+#saturn{
+  background: url(../images/game1/saturn.png);
+  width: 500px; height: 500px;
+  background-repeat: no-repeat;
+  position: absolute;
+  transform: scale(.7);
+  top: 170px;
+  left: -50px; 
+}
+#uranus{
+  background: url(../images/game1/uranus.png);
+  width: 500px; height: 500px;
+  background-repeat: no-repeat;
+  position: absolute;
+  transform: scale(.8);
+  top: 190px;
+  left: 20px; 
+}
+
+#neptune{
+  background: url(../images/game1/neptune.png);
+  width: 500px; height: 500px;
+  background-repeat: no-repeat;
+  position: absolute;
+  transform: scale(.8);
+  top: 190px;
+  left: 30px; 
+}
+
+
+
+/* LEARNING TABLET */
+.learning-tablet-container{
+  width: 425px;
+  height: 525px;
+  border: 40px solid #1d1d1b;
+  position: absolute;
+  top: 30px;
+  left: 460px;
+  border-radius: 37px;
+  border-bottom: 80px solid #1d1d1b;
+  background-color:#dadada;
+}
+
+.home-button-container{
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
+  position: absolute;
+  top: 542px;
+  left: 190px;
+  background-color: white;
+}
+
+.home-button{
+  width: 20px; height: 20px;
+  border: 1px solid black;
+  margin: 13px auto;
+
+}
+.tablet-screen-container{
+  font-family: "Comic Sans MS";
+}
+
+.tablet-screen-container h2{
+  font-size: 21px;
+}
+
+/* FACTS CONTAINER - GENERAL RULING */
+.facts-container h2{
+  text-align: center;
+}
+
+.facts-container h1{
+  font-size: 47px;
+  margin: 0;
+  color: white;
+}
+
+.facts-container p{
+  font-size: 12px;
+  font-weight: bold;
+  width: 255px;
+}
+
+/* FACT 1 */
+.fact1 h1{
+  width: 60px; height: 60px;
+  text-align: center;
+  background-color: #e6007e;
+  border-radius: 50%;
+  line-height: 60px;
+}
+
+.fact1{
+  display: flex;
+  width: 400px;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 25px;
+  margin-top: 40px;
+}
+
+.fact1 p span{
+  color: #e6007e;
+}
+
+/* FACT 2 */
+.fact2 h1{
+  width: 60px; height: 60px;
+  text-align: center;
+  background-color: #36a9e1;
+  border-radius: 50%;
+  line-height: 60px;
+}
+
+.fact2{
+  display: flex;
+  width: 400px;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.fact2 span{
+  color: #36a9e1;
+}
+
+/* FACT 3 */
+.fact3 h1{
+  width: 60px; height: 60px;
+  text-align: center;
+  background-color: #e94e1b;
+  border-radius: 100%;
+  line-height: 60px;
+}
+
+.fact3{
+  display: flex;
+  width: 400px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.fact3 p span{
+  color: #e94e1b;
+}
+
+/* KEYWORDS */
+.keywords-container{
+  height: 175px;
+  width: 100%;
+  bottom: 0;
+  background-color: #c6c6c6;
+  position: absolute;
+}
+
+.keywords-container h2{
+  margin-left: 40px;
+ 
+}
+
+.keywords-container p{
+  margin-left: 40px;
+  font-size: 12px;
+  width: 328px;
+}
+
+.keyword1 p span{
+  color: #e6007e;
+  font-weight: bold;
+}
+
+.keyword2 p span{
+  color: #36a9e1;
+  font-weight: bold;
+}
+
+.keyword3 p span{
+  color: #e94e1b;
+  font-weight: bold;
+}
+
+
+.green-background{
+  background-color: #066954;
+  width: 626px;
+  height: 768px;
+  position: absolute;
+  right: 0px;
+  border-left: 12px solid white;
+}
+
+
+.instructions p{
+  position: absolute;
+  color: white;
+  font-family: "Comic Sans MS";
+  font-size: 16px;
+  bottom: 10px;
+  left: 140px;
+  text-align: center;
+  width: 350px;
+}
+
+
+/* ALERT BOX */
+
+.overlay-page-learning{
+  width: 1024px;
+  height: 768px;
+  background: rgba(0, 0, 0, .8);
+  position: absolute;
+  z-index: 3;
+  display: none;
+}
+
+.learning-page-alertbox{
+  position: absolute;
+  font-family: "Comic Sans MS";
+  opacity: 1;
+  top: 200px;
+  left:200px;
+  z-index: 3;
+  width: 600px;
+  box-shadow: 0px 2px 21px 5px rgba(0,0,0,0.9);
+  animation: fadein 1s ease-in-out;
+  animation-delay: .1s;
+  display: none;
+}
+
+.learning-page-alertbox h3{
+  color: #ffff;
+  text-align: center;
+  margin: 0;
+  padding: 30px 0px;
+  background-color: #00886e;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.learning-page-alertbox p{
+  color: #222222;
+  margin: 0;
+  background-color: #fdfdfd;
+  padding: 50px;
+}
+
+.learning-page-alertbox .learning-page-alertbox-btn{
+  background-color: #dcdcdc;
+  height: 100px;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.learning-page-alertbox .btn-not-ready{
+  border: 2px solid #00886e;
+  color: #00886e;
+  width: 100px;
+  text-align: center;
+  padding: 15px 15px;
+  position: absolute;
+  left: 300px;
+  top: 301px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.learning-page-alertbox .btn-ready{
+  border: 2px solid #00886e;
+  background-color: #00886e;
+  color: white;
+  width: 100px;
+  text-align: center;
+  padding: 15px 15px;
+  position: absolute;
+  left: 160px;
+  top: 301px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.planetarium-button{
+  background: url(../images/learning-page/planetarium-dome-small.png);
+  width: 110px;
+  height: 55px;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+
+
+/* ================================================================================================================*\
+
+GAME 1
+
+\* ================================================================================================================*/
+
+
+.page-game1{
+  background-color: black;
+  width: 1024px; height: 768px;
+
+}
+
+
+#game1-alertbox{
+  position: absolute;
+  font-family: "Comic Sans MS";
+  opacity: 1;
+  top: 140px;
+  left: 210px;
+
+  z-index: 3;
+  width: 600px;
+  box-shadow: 0px 2px 21px 5px rgba(0,0,0,0.9);
+  animation: fadein 1s ease-in-out;
+  animation-delay: .1s;
+  }
+
+  @keyframes fadein {
+    0%{
+      transform: scale(0);
+    }
+
+    50%{
+      transform: scale(1.1);
+    }
+
+    100%{
+      transform: scale(1);
+    }
+}
+
+#question{
+  color: #ffff;
+  text-align: center;
+  margin: 0;
+  padding: 30px 0px;
+  background-color: #222222;
+  border-radius: 10px 10px 0px 0px;
+  font-size: 20.8px;
+}
+
+#cluestamp{
+  font-size: 16px;
+}
+
+#cluestamp1{
+  top: 135px;
+  color: #00886e;
+  border: 5px double #00886e;
+  width: 75px;
+  text-align: center;
+  padding: 5px;
+  position: absolute;
+  left: 50px;
+}
+
+#cluestamp2{
+  top: 215px;
+  color: #00886e;
+  border: 5px double #00886e;
+  width: 75px;
+  text-align: center;
+  padding: 5px;
+  position: absolute;
+  left: 50px;
+}
+
+#cluestamp3{
+  top: 295px;
+  color: #00886e;
+  border: 5px double #00886e;
+  width: 75px;
+  text-align: center;
+  padding: 5px;
+  position: absolute;
+  left: 50px;
+}
+
+#clues{
+  color: #222222;
+  margin: 0;
+  background-color: #fdfdfd;
+  width: 600px;
+  height: 300px;
+  font-size: 16px;
+  
+}
+
+#clue1{
+  position: absolute;
+  top: 135px;
+  left: 170px;
+  width: 420px;
+}
+
+#clue2{
+  position: absolute;
+  top: 215px;
+  left: 170px;
+  width: 420px;
+}
+
+#clue3{
+  position: absolute;
+  top: 295px;
+  left: 170px;
+  width: 420px;
+}
+
+#game1-alertbox #grey-background{
+  background-color: #dcdcdc;
+  height: 100px;
+  border-radius: 0px 0px 10px 10px;
+}
+
+#game1-alertbox #grey-background #button-guess{
+  background-color: #00886e;
+  border: 2px solid #00886e;
+  color: white;
+  width: 100px;
+  text-align: center;
+  padding: 15px 15px;
+  position: absolute;
+  left: 160px;
+  top: 410px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+
+#button-clue-one{
+  background-color: white;
+  border: 2px solid #00886e;
+  color: #00886e;
+  width: 100px;
+  text-align: center;
+  padding: 15px 15px;
+  position: absolute;
+  left: 300px;
+  font-size: 16px;
+  top: 410px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#button-clue-two{
+  background-color: white;
+  border: 2px solid #00886e;
+  color: #00886e;
+  width: 100px;
+  text-align: center;
+  padding: 15px 15px;
+  position: absolute;
+  left: 300px;
+  font-size: 16px;
+  top: 410px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.correctanswers{
+  position: absolute;
+  color: white;
+  bottom: 110px;
+  right:20px;
+  width: 100px;
+  font-size: 18px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.score{
+	position: absolute;
+	bottom: 50px;
+	right: 70px;
+	font-size: 3em;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+.move-score{
+	top: 300px;
+	right: 450px;
+}
+
+
+.hidden{
+	opacity: 0;
+}
+
+
+
+@keyframes zoomin{
+  0%{
+    transform: scale(1);
+  }
+
+  50%{
+    transform: scale(1.1);
+  }
+
+  100%{
+    transform: scale(1);
+  }
+}
+
+
+.correct{
+	border: 5px solid green !important; 
+	color: white;
+  animation: opacity 1s;
+}
+
+.incorrect{
+	border: 5px solid #D0312D !important; 
+	color: white;
+  animation: opacity 1s;
+}
+
+
+
+.answer-box{
+	position: absolute;
+	width: 150px;
+  color: white;
+  z-index: 1;
+  font-family: 'Courier New', Courier, monospace;
+  text-transform: uppercase;
+  }
+  
+  #answer1{
+	position: absolute;
+	top: 75px;
+	left: 175px;
+	border: 5px solid white;
+	text-align: center;
+	padding: 142px 25px 25px 25px;
+	border-radius: 25px;
+  
+  }
+  
+  #answer2{
+	position: absolute;
+	top: 75px;
+	left: 405px;
+	border: 5px solid white;
+	text-align: center;
+	padding: 142px 25px 25px 25px;
+	border-radius: 25px;
+
+  }
+
+  #answer3{
+    position: absolute;
+    top: 75px;
+    left: 635px;
+    border: 5px solid white;
+    text-align: center;
+    padding: 142px 25px 25px 25px;
+    border-radius: 25px;
+  
+    }
+  
+  #answer4{
+      position: absolute;
+      top: 293px;
+      left: 175px;
+      border: 5px solid white;
+      text-align: center;
+      padding: 142px 25px 25px 25px;
+      border-radius: 25px;
+      
+  }
+      
+  #answer5{
+      position: absolute;
+      top: 293px;
+      left: 405px;
+      border: 5px solid white;
+      text-align: center;
+      padding: 142px 25px 25px 25px;
+      border-radius: 25px;
+    
+  }
+    
+  #answer6{
+        position: absolute;
+        top: 293px;
+        left: 635px;
+        border: 5px solid white;
+        text-align: center;
+        padding: 142px 25px 25px 25px;
+        border-radius: 25px;
+      
+  }
+
+  #answer7{
+    position: absolute;
+    top: 511px;
+    left: 175px;
+    border: 5px solid white;
+    text-align: center;
+    padding: 142px 25px 25px 25px;
+    border-radius: 25px;
+    
+    }
+    
+    #answer8{
+    position: absolute;
+    top: 511px;
+    left: 405px;
+    border: 5px solid white;
+    text-align: center;
+    padding: 142px 25px 25px 25px;
+    border-radius: 25px;
+  
+    }
+  
+    #answer9{
+      position: absolute;
+      top: 511px;
+      left: 635px;
+      border: 5px solid white;
+      text-align: center;
+      padding: 142px 25px 20px 25px;
+      border-radius: 25px;
+    
+      }
+
+        
+
+.mercury{
+  background: url(../images/game1/mercury.png);
+  width: 500px; height: 500px;
+  background-repeat: no-repeat;
+  position: absolute;
+  transform: scale(0.3);
+  top: -65px;
+  left: 65px; 
+}
+
+.venus{
+  background: url(../images/game1/venus.png);
+  width: 500px; height: 500px;
+  background-repeat: no-repeat;
+  position: absolute;
+  transform: scale(0.3);
+  top: -65px;
+  left: 290px;
+
+}
+
+.earth{
+  background: url(../images/game1/earth.png);
+  width: 500px; height: 500px;
+  background-repeat: no-repeat;
+  position: absolute;
+  transform: scale(0.25);
+  top: -82px;
+  left: 505px; 
+}
+
+.mars{
+  background: url(../images/game1/mars.png);
+  width: 500px; height: 500px;
+  background-repeat: no-repeat;
+  position: absolute;
+  transform: scale(0.3);
+  top: 155px;
+  left: 60px; 
+}
+
+.jupiter{
+  background: url(../images/game1/jupiter.png);
+  width: 500px; height: 500px;
+  background-repeat: no-repeat;
+  position: absolute;
+  transform: scale(0.25);
+  top: 128px;
+  left: 270px; 
+}
+
+
+.saturn{
+  background: url(../images/game1/saturn.png);
+  width: 500px; height: 500px;
+  background-repeat: no-repeat;
+  position: absolute;
+  transform: scale(0.27);
+  top: 135px;
+  left: 492px; 
+}
+
+.uranus{
+  background: url(../images/game1/uranus.png);
+  width: 500px; height: 500px;
+  background-repeat: no-repeat;
+  position: absolute;
+  transform: scale(0.25);
+  top: 370px;
+  left: 56px; 
+}
+
+.neptune{
+  background: url(../images/game1/neptune.png);
+  width: 500px; height: 500px;
+  background-repeat: no-repeat;
+  position: absolute;
+  transform: scale(0.3);
+  top: 370px;
+  left: 290px; 
+}
+
+.pluto{
+  position: absolute;
+  top: 580px;
+  left: 650px; 
+  color: white;
+  width: 175px;
+  text-align: center;
+}
+
+
+
+/* START POP UP GAME 1*/
+
+.overlay-startgame1{
+  width: 1024px;
+  height: 768px;
+  background: rgba(0, 0, 0, .8);
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+}
+
+.startgame1-page-alertbox{
+  position: absolute;
+  font-family: "Comic Sans MS";
+  opacity: 1;
+  top: 140px;
+  left: 210px;
+  z-index: 3;
+  width: 600px;
+  box-shadow: 0px 2px 21px 5px rgba(0,0,0,0.9);
+  animation: fadein 1s ease-in-out;
+  animation-delay: .1s;
+ 
+  }
+
+  @keyframes fadein {
+    0%{
+      transform: scale(0);
+    }
+
+    50%{
+      transform: scale(1.1);
+    }
+
+    100%{
+      transform: scale(1);
+    }
+}
+
+
+
+
+  .startgame1-page-alertbox h3{
+    color: #ffff;
+    text-align: center;
+    margin: 0;
+    padding: 30px 0px;
+    background-color: #222222;
+    border-radius: 10px 10px 0px 0px;
+  }
+  
+  .startgame1-page-alertbox p{
+    color: #222222;
+    margin: 0;
+    background-color: #fdfdfd;
+    padding: 50px 50px 0 50px;
+  }
+
+  .startgame1-page-alertbox p:nth-child(3){
+   padding: 10px 50px 50px 50px;
+  }
+  
+  .startgame1-page-alertbox .grey-background{
+    background-color: #dcdcdc;
+    height: 100px;
+    border-radius: 0px 0px 10px 10px;
+  }
+  
+  .startgame1-page-alertbox .grey-background .button-ready-startgame1{
+    background-color: #00886e;
+    color: white;
+    width: 100px;
+    text-align: center;
+    padding: 15px 15px;
+    position: absolute;
+    left: 240px;
+    top: 360px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+
+  
+  /* END GAME 1 POP UP */
+
+  .endgame1-page-alertbox{
+    position: absolute;
+    font-family: "Comic Sans MS";
+    opacity: 1;
+    top: 200px;
+    left: 210px;
+    z-index: 3;
+    width: 600px;
+    box-shadow: 0px 2px 21px 5px rgba(0,0,0,0.9);
+    animation: fadein 1s ease-in-out;
+    animation-delay: .1s;
+    display: none;
+    }
+  
+    @keyframes fadein {
+      0%{
+        transform: scale(0);
+      }
+  
+      50%{
+        transform: scale(1.1);
+      }
+  
+      100%{
+        transform: scale(1);
+      }
+  }
+  
+  
+  
+  
+    .endgame1-page-alertbox h3{
+      color: #ffff;
+      text-align: center;
+      margin: 0;
+      padding: 30px 0px;
+      background-color: #00886e;
+      border-radius: 10px 10px 0px 0px;
+    }
+    
+    .endgame1-page-alertbox p{
+      color: #222222;
+      margin: 0;
+      background-color: #fdfdfd;
+      padding: 50px 50px 50px 50px;
+    }
+  
+    
+    .endgame1-page-alertbox .grey-background{
+      background-color: #dcdcdc;
+      height: 100px;
+      border-radius: 0px 0px 10px 10px;
+    }
+    
+    .endgame1-page-alertbox .grey-background .button-ready-endgame1{
+      background-color: #00886e;
+      color: white;
+      width: 100px;
+      text-align: center;
+      padding: 15px 15px;
+      position: absolute;
+      left: 240px;
+      top: 260px;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 5;
+    }
+    
+    /*Gameover Screen  */
+    .overlay-gameover{
+      width: 1024px;
+      height: 768px;
+      background: rgba(0, 0, 0, .8);
+      position: absolute;
+      z-index: 3;
+      display: none;
+    }
+
+    .gameover-page-alertbox{
+      position: absolute;
+      font-family: "Comic Sans MS";
+      opacity: 1;
+      top: 200px;
+      left: 210px;
+      z-index: 3;
+      width: 600px;
+      box-shadow: 0px 2px 21px 5px rgba(0,0,0,0.9);
+      animation: fadein 1s ease-in-out;
+      animation-delay: .1s;
+      display: none;
+      }
+    
+      @keyframes fadein {
+        0%{
+          transform: scale(0);
+        }
+    
+        50%{
+          transform: scale(1.1);
+        }
+    
+        100%{
+          transform: scale(1);
+        }
+    }
+    
+    
+    
+    .gameover-page-alertbox h3{
+        color: #ffff;
+        text-align: center;
+        margin: 0;
+        padding: 30px 0px;
+        background-color: 	#D0312D;
+        border-radius: 10px 10px 0px 0px;
+      }
+      
+      .gameover-page-alertbox p{
+        color: #222222;
+        margin: 0;
+        background-color: #fdfdfd;
+        padding: 50px 50px 50px 50px;
+      }
+    
+      
+      .gameover-page-alertbox .grey-background{
+        background-color: #dcdcdc;
+        height: 100px;
+        border-radius: 0px 0px 10px 10px;
+      }
+      
+      .gameover-page-alertbox .grey-background .button-ready-gameover{
+        background-color: #00886e;
+        color: white;
+        width: 100px;
+        text-align: center;
+        padding: 15px 15px;
+        position: absolute;
+        left: 240px;
+        top: 260px;
+        border-radius: 10px;
+        cursor: pointer;
+        z-index: 5;
+      }
+   
+    
+/* ================================================================================================================*\
+
+GAME 2
+
+\* ================================================================================================================*/
+
+.page-game2{
+  background: url(../images/game2/stars-backdrop.png);
+  width: 1024px; height: 768px;
+  background-position: 0 0;
+  background-size: auto 100%;
+  font-family: "Comic Sans MS";
+}
+
+
+.drag-me-container{
+  border: 2px solid white;
+  width: 550px;
+  height: 180px;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 20px;
+  text-align: center;
+  background-color: black;
+}
+
+.drag-me{
+	padding: 20px 20px;
+	color: white;
+	width: 120px;
+	z-index: 2;
+	text-align: center;
+  font-size: 18px;
+  border: 2px solid white;
+  position: absolute;
+  top:15px;
+
+}
+
+
+#drag1{
+  top: 95px;
+  left: 193px;
+  background-color: #36a9e1;
+  
+}
+
+#drag2{
+  top: 95px;
+  left: 371px;
+  background-color: #e94e1b;
+}
+
+#drag3{
+  left: 371px;
+  background-color: #3CCC75;
+}
+
+#drag4{
+  top: 95px;
+  left: 15px;
+  background-color: #881EE6;
+}
+
+#drag5{
+  left: 193px;
+  background-color: #066954;;
+}
+
+#drag6{
+  left: 15px;
+  background-color: #e6007e;
+}
+
+.target-container{
+  position: absolute;
+  top: 200px;
+}
+
+.target{
+	border: 2px solid white;
+	color: white;
+	width: 156px;
+  height: 65px;
+	text-align: center;
+  font-size: 12px;
+  position: absolute;
+  left: 100px;
+  background-color: black;
+
+}
+
+#target1{
+	position: absolute;	
+	top:50px;
+}
+
+#target2{
+	position: absolute;
+	top: 130px;
+}
+
+#target3{
+	position: absolute;
+	top: 210px;
+}
+
+#target4{
+	position: absolute;
+	top: 290px;
+}
+
+#target5{
+	position: absolute;
+	top: 370px;
+}
+
+#target6{
+	position: absolute;
+	top: 450px;
+}
+
+.def-container{
+  position: absolute;
+  top: 200px;
+}
+
+.def{
+  position: absolute;
+  color: white;
+  width: 600px;
+  left: 300px;
+
+}
+
+.def-orbit{
+  top: 60px;
+}
+
+.def-atmosphere{
+  top: 150px;
+}
+
+.def-gravity{
+  top: 230px;
+}
+
+.def-solarsystem{
+  top: 310px;
+}
+
+.def-sun{
+  top: 390px;
+}
+
+.def-gasgiants{
+  top: 460px;
+}
+
+
+/* POP UP GAME 2*/
+
+.overlay-startgame2{
+  width: 1024px;
+  height: 768px;
+  background: rgba(0, 0, 0, .8);
+  position: absolute;
+  z-index: 3;
+}
+
+.startgame2-page-alertbox{
+  position: absolute;
+  opacity: 1;
+  top: 200px;
+  left:200px;
+  z-index: 3;
+  width: 600px;
+  box-shadow: 0px 2px 21px 5px rgba(0,0,0,0.9);
+  animation: fadein 1s ease-in-out;
+  animation-delay: .1s;
+  }
+
+  @keyframes fadein {
+    0%{
+      transform: scale(0);
+    }
+
+    50%{
+      transform: scale(1.1);
+    }
+
+    100%{
+      transform: scale(1);
+    }
+}
+
+
+
+
+  .startgame2-page-alertbox h3{
+    color: #ffff;
+    text-align: center;
+    margin: 0;
+    padding: 30px 0px;
+    background-color: #222222;
+    border-radius: 10px 10px 0px 0px;
+  }
+  
+  .startgame2-page-alertbox p{
+    color: #222222;
+    margin: 0;
+    background-color: #fdfdfd;
+    padding: 50px;
+  }
+  
+  .startgame2-page-alertbox .grey-background{
+    background-color: #dcdcdc;
+    height: 100px;
+    border-radius: 0px 0px 10px 10px;
+  }
+  
+  .startgame2-page-alertbox .grey-background .button-ready-startgame2{
+    background-color: #00886e;
+    color: white;
+    width: 100px;
+    text-align: center;
+    padding: 15px 15px;
+    position: absolute;
+    left: 240px;
+    top: 257px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  
+  /* POP UP game 2-end*/
+
+.overlay-endgame2{
+  width: 1024px;
+  height: 768px;
+  background: rgba(0, 0, 0, .8);
+  position: absolute;
+  z-index: 3;
+  display: none;
+}
+
+.endgame2-page-alertbox{
+  position: absolute;
+  opacity: 1;
+  top: 200px;
+  left:200px;
+  z-index: 3;
+  width: 600px;
+  box-shadow: 0px 2px 21px 5px rgba(0,0,0,0.9);
+  display: none;
+  }
+
+
+
+  .endgame2-page-alertbox h3{
+    color: #ffff;
+    text-align: center;
+    margin: 0;
+    padding: 30px 0px;
+    background-color: #00886e;
+    border-radius: 10px 10px 0px 0px;
+  }
+  
+  .endgame2-page-alertbox p{
+    color: #222222;
+    margin: 0;
+    background-color: #fdfdfd;
+    padding: 50px;
+  }
+  
+  .endgame2-page-alertbox .grey-background{
+    background-color: #dcdcdc;
+    height: 100px;
+    border-radius: 0px 0px 10px 10px;
+  }
+  
+  .endgame2-page-alertbox .grey-background .button-ready-leave{
+    background-color: #00886e;
+    color: white;
+    width: 100px;
+    text-align: center;
+    padding: 15px 15px;
+    position: absolute;
+    left: 240px;
+    top: 278px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+/* ================================================================================================================*\
+
+END GAME SCREEN
+
+\* ================================================================================================================*/
+
+.overlay-endgamescreen{
+  width: 1024px;
+  height: 768px;
+  background: rgba(0, 0, 0, .8);
+  position: absolute;
+  z-index: 3;
+  display: none;
+  top: 0px;
+}
+
+.endgamescreen-page-alertbox{
+  position: absolute;
+  font-family: "Comic Sans MS";
+  opacity: 1;
+  top: 150px;
+  left: 210px;
+  z-index: 3;
+  width: 600px;
+  box-shadow: 0px 2px 21px 5px rgba(0,0,0,0.9);
+  animation: fadein 1s ease-in-out;
+  animation-delay: .1s;
+  display: none;
+  }
+
+  @keyframes fadein {
+    0%{
+      transform: scale(0);
+    }
+
+    50%{
+      transform: scale(1.1);
+    }
+
+    100%{
+      transform: scale(1);
+    }
+}
+
+
+
+
+  .endgamescreen-page-alertbox h3{
+    color: #ffff;
+    text-align: center;
+    margin: 0;
+    padding: 30px 0px;
+    background-color: #00886e;
+    border-radius: 10px 10px 0px 0px;
+  }
+  
+  .endgamescreen-page-alertbox p{
+    color: #222222;
+    margin: 0;
+    background-color: #fdfdfd;
+    padding: 50px 50px 50px 50px;
+  }
+
+  
+  .endgamescreen-page-alertbox .grey-background{
+    background-color: #dcdcdc;
+    height: 100px;
+    border-radius: 0px 0px 10px 10px;
+  }
+  
+  .endgamescreen-page-alertbox .badge1-complete{
+    position: absolute;
+    background: url(../images/main-menu/learning-badge.png);
+    width: 76px;
+    height: 75px;
+    left: 150px;
+    top: 290px;
+
+  }
+
+  .endgamescreen-page-alertbox .badge2-complete{
+    position: absolute;
+    background: url(../images/main-menu/mission-1-badge.png);
+    width: 76px;
+    height: 75px;
+    left: 250px;
+    top: 290px;
+
+  }
+
+  .endgamescreen-page-alertbox .badge3-complete{
+    position: absolute;
+    background: url(../images/main-menu/mission-2-badge.png);
+    width: 76px;
+    height: 75px;
+    left: 350px;
+    top: 290px;
+
+  }
+ 
+ 
+
+
+/* ================================================================================================================*\
+
+	PERSISTENT CONTAINERS
+
+\* ================================================================================================================*/
+
+
+
+/* ================================================================================================================*\
+
+	TRANSITION CODE
+
+	Leave this alone if you are happy with either fade or push transitions between pages.  If you want faster
+	transitions you could alter the 1s timing in the .in, .out class rules below
+
+\* ================================================================================================================*/
+
+/**
+ * The transition function in script.js adds the following classes dynamically to the
+ * incoming and outgoing pages.  Adding the in, .out classes to the pages is what sets
+ * up the animation. A further class is added (e.g. .push-left) depending on the type
+ * of animation chosen.  It is this class addition that starts the animation running
+ */
+
+.in, .out{
+	animation-timing-function: ease-in-out;
+	animation-duration: 1s;
+}
+
+.push-left.out{
+	animation-name: outToLeft;
+}
+
+.push-left.in{
+	animation-name: inFromRight;
+}
+
+
+.push-right.out{
+	animation-name: outToRight;
+}
+
+.push-right.in{
+	animation-name: inFromLeft;
+}
+
+.fade.out{
+	animation-name: fadeOut;
+}
+
+.fade.in{
+	animation-name: fadeIn;
+}
+
+.upwards.in{
+	animation-name: upwardsIn;
+}
+
+.downwards.in{
+	animation-name: downwardsIn;
+}
+
+@keyframes outToLeft {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+}
+
+
+@keyframes outToRight {
+    from { transform: translateX(0); }
+    to { transform: translateX(100%); }
+}
+
+
+@keyframes inFromRight {
+    from { transform: translateX(1024px); }
+    to { transform: translateX(0px); }
+}
+
+
+@keyframes inFromLeft {
+    from { transform: translateX(-1024px); }
+    to { transform: translateX(0px); }
+}
+
+@keyframes upwardsIn {
+  from { transform: translateY(-768px); }
+  to { transform: translateY(0px); }
+}
+
+@keyframes downwardsIn{
+  from { transform: translateY(0px); }
+  to { transform: translateY(768px); }
+}
+
+
+@keyframes fadeIn {
+    from { opacity:0; }
+    to { opacity:1; }
+}
+
+
+@keyframes fadeOut {
+    from { opacity:1; }
+    to { opacity:0; }
+}
+
+
+
+
+

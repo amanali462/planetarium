@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="56" height="109" viewBox="0 0 56 109">
+  <g id="volume-button-toggle" transform="translate(-2 -1)">
+    <g id="Rectangle_1" data-name="Rectangle 1" transform="translate(2 1)" fill="none" stroke="#fff" stroke-width="2">
+      <rect width="56" height="54" rx="13" stroke="none"/>
+      <rect x="1" y="1" width="54" height="52" rx="12" fill="none"/>
+    </g>
+    <path id="volume-on" d="M4.5,13.5v9h6L18,30V6l-7.5,7.5ZM24.75,18A6.751,6.751,0,0,0,21,11.955V24.03A6.711,6.711,0,0,0,24.75,18ZM21,4.845v3.09a10.5,10.5,0,0,1,0,20.13v3.09a13.491,13.491,0,0,0,0-26.31Z" transform="translate(12.5 10.5)" fill="#fff"/>
+    <g id="Rectangle_2" data-name="Rectangle 2" transform="translate(2 56)" fill="none" stroke="#fff" stroke-width="2">
+      <rect width="56" height="54" rx="13" stroke="none"/>
+      <rect x="1" y="1" width="54" height="52" rx="12" fill="none"/>
+    </g>
+    <path id="volume-off" d="M24.75,18A6.751,6.751,0,0,0,21,11.955V15.27l3.675,3.675A6.348,6.348,0,0,0,24.75,18Zm3.75,0a10.264,10.264,0,0,1-.81,3.96l2.265,2.265A13.2,13.2,0,0,0,31.5,18,13.5,13.5,0,0,0,21,4.845v3.09A10.508,10.508,0,0,1,28.5,18ZM6.405,4.5,4.5,6.405,11.6,13.5H4.5v9h6L18,30V19.9l6.375,6.375A10.385,10.385,0,0,1,21,28.05v3.09a13.484,13.484,0,0,0,5.535-2.715l3.06,3.075L31.5,29.595,18,16.095ZM18,6,14.865,9.135,18,12.27Z" transform="translate(12.5 65.5)" fill="#fff"/>
+  </g>
+</svg>

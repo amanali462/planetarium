@@ -1,0 +1,978 @@
+<!-- *******************************************************************************************
+  *
+  *  PAGE FRAMEWORK 
+  *
+  *  code supplied by Ant Pearson (2014) for student use in the LMU Interactive Media Design
+  *  module.  You are free to use this code as a starting point for your interactive builds.
+  *  The example has 5 pages: an intro, menu, and 3 content pages but you should modify to 
+  *  suit your own interactive designs.
+  *
+  *********************************************************************************************** -->
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Planetarium</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+		<!-- makes browsers render all elements more consistently. Similar to a CSS reset file -->
+		<link rel="stylesheet" href="css/normalize.css">
+
+		<!-- the main style sheet you should edit -->  
+		<link rel="stylesheet" href="css/style.css"> 
+
+		<!-- link to PT-Sans font from google fonts --> 
+		<link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+
+		<!-- link to local version of jQuery --> 
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+
+		
+
+		
+
+		<!-- Link to your own javascript file  --> 
+		<script src="js/script.js"></script>
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+	</head>
+	<body>
+		<!-- main page wrap for the interactive -->
+		<div id="main-container"> 
+			
+			<!-- container for all the individual pages -->
+			<div class="pages">
+				<!-- ========================= INTRO =========================== -->
+
+				<div class="page-intro current">
+					<audio loop autoplay id="introMusic">  
+						<source src="./sound/background-music2.mp3" type="audio/mpeg">
+					</audio>
+					
+					<audio loop id="introMusic2">  
+						<source src="./sound/game-music.mp3" type="audio/mpeg">
+					</audio>
+				
+					<audio id="slidingGlassDoor">
+						<source src="./sound/sliding-glass-door.mp3" type="audio/mpeg">
+					</audio>
+		
+					<audio id="buttonPush">
+						<source src="./sound/button-push.mp3" type="audio/mpeg">  
+					</audio>
+
+					<audio id="typewriter1">
+						<source src="./sound/typewriter1.mp3" type="audio/mpeg">  
+					</audio>
+
+					<audio id="typewriter2">
+						<source src="./sound/typewriter2.mp3" type="audio/mpeg">  
+					</audio>
+
+					<audio id="typewriter3">
+						<source src="./sound/typewriter3.mp3" type="audio/mpeg">  
+					</audio>
+
+					<audio id="typewriter4">
+						<source src="./sound/typewriter4.mp3" type="audio/mpeg">  
+					</audio>
+
+					<audio id="typewriter5">
+						<source src="./sound/typewriter5.mp3" type="audio/mpeg">  
+					</audio>
+
+					<audio id="typewriter6">
+						<source src="./sound/typewriter6.mp3" type="audio/mpeg">  
+					</audio>
+
+					<audio id="revealBadge">
+						<source src="./sound/reveal-badge.mp3" type="audio/mpeg">  
+					</audio>
+
+					<audio id="maximise">
+						<source src="./sound/maximise.mp3" type="audio/mpeg">  
+					</audio>
+					
+					<audio loop id="tabletVibrate">
+						<source src="./sound/phone-vibrating.mp3" type="audio/mpeg">  
+					</audio>
+
+					<audio id="rocketEngine">
+						<source src="./sound/rocket-engine.mp3" type="audio/mpeg">  
+					</audio>
+
+					<audio id="completion">
+						<source src="./sound/completion.mp3" type="audio/mpeg">  
+					</audio>
+
+					<audio id="popUp">
+						<source src="./sound/pop-up.mp3" type="audio/mpeg">  
+					</audio>
+
+					<audio id="badgeEarned">
+						<source src="./sound/badge-earned.mp3" type="audio/mpeg">  
+					</audio>
+
+					<audio id="incorrectSound">
+						<source src="./sound/incorrect.mp3" type="audio/mpeg">  
+					</audio>
+					
+					<div id="movingStars"></div>
+		
+				
+		
+					<div class="logo">
+						<h1>Planetarium</h1>
+						<div class="earth-intro"></div>  
+							<div class="planetarium">             
+								<div class="planetarium-without-doors"></div>
+								<div class="planetarium-dome"></div>
+								<div class="doors">
+									<div class="left-door"></div>
+									<div class="right-door"></div>
+								</div>
+							</div>
+							<div class="intro-button">Start</div>
+					</div>
+				</div> <!-- intro page -->
+
+				<!-- ========================= MENU =========================== -->
+
+				<div class="page-menu">
+					<div class="control-centre"></div>
+					
+					<div class="middle-screen">
+						<div class="screen-text">
+
+							<div class="screen-text-page1-container">
+								<div class="screen-text-page1"> 
+									<p>Hi, welcome to the Planetarium. I am Novark,</p> 
+									<p>your AI virtual assistant. At Planetarium </p>
+									<p>we are here to train you to become an</p> 
+									<p>astronaut. Are you ready to go?</p>
+								</div>
+									<div class="screen-text-button-page1">YES</div>
+							</div>
+
+							<div class="screen-text-page2-container">
+								<div class="screen-text-page2">
+									<p>Great! Let's get started. You will need to</p>
+									<p>to earn some space badges to become an</p>
+									<p>astronaut. Badges can be earnt through</p>
+									<p>learning and playing games (the two beside me).</p>
+									<p>But first, you may need to visit space to</p>
+									<p>learn more about our planets.</p>
+								</div>
+									<div class="screen-text-button-page2">NEXT</div>								
+							</div>
+
+							<div class="screen-text-page3-container">
+								<div class="screen-text-page3">
+									<p>Before you go, it may be a good idea to take</p> 
+									<p>me with you to space (I may know a thing or</p>
+									<p>two). Just tap on the tablet, and we'll be</p>
+									<p>on our way!</p>
+								</div>	
+							</div>
+
+							<div class="screen-text-page4-container">
+								<div class="screen-text-page4">
+									<p>Great Work! You have earnt your first badge.</p> 
+									<p>You now have the knowledge to complete the</p>
+									<p>missions and earn your final two badges to</p>
+									<p>succesfully become an astronaut at the</p>
+									<p>Planetarium. Just tap on any one of the</p>
+									<p>mission screens to start.</p>
+								</div>	
+							</div>
+
+							<div class="screen-text-page5-container">
+								<div class="screen-text-page5">
+									<p>Well done on completing Mission 2! You have</p> 
+									<p>earnt your Mission 2 badge!</p>
+								</div>	
+							</div>
+
+							<div class="screen-text-page6-container">
+								<div class="screen-text-page6">
+									<p>Great job on completing Mission 1! You have</p> 
+									<p>earnt your Mission 1 badge!</p>
+								</div>	
+							</div>
+						
+						</div>			
+					</div>
+					
+					<div class="game-1">
+						<h2>Mission 1</h2>
+					</div>
+					
+					<div class="game-2">
+						<h2>Mission 2</h2>
+					</div>
+
+					<div class="tablet"></div>
+					<div class="coffee-mug"></div>
+					
+					<div class="badges">
+						<div class="badge-one"></div>
+						<div class="badge-two"></div>
+						<div class="badge-three"></div>
+						<h2>Space Badges</h2>
+					</div>
+
+					<div class="show-badges">
+						<div class="show-badge-one"></div>
+						<div class="show-badge-two"></div>
+						<div class="show-badge-three"></div>
+						<div class="space-badges-text">Space Badges</div>
+					</div>
+
+					<div class="badges-locked">
+						<div class="badge-one-locked"></div>
+						<div class="badge-two-locked"></div>
+						<div class="badge-three-locked"></div>
+					</div>
+
+					<div class="overlay-endgamescreen"></div>
+					<div class="endgamescreen-page-alertbox">
+						<h3>Mission Accomplished</h3>
+						<p>Well done! You have completed both misions and have earned all three of your space badges. At Planetarium we would like to congratulate you on becoming an astronaut with us. We hope to see you soon! Thanks for playing!</p>
+						<div class="grey-background">
+							<div class="badge1-complete"></div>
+							<div class="badge2-complete"></div>
+							<div class="badge3-complete"></div>
+						</div>
+					</div>
+				
+				</div> <!-- menu page -->
+
+				<!-- ========================= LOADING SCREEN =========================== -->
+
+				<div class="page-loading-screen">
+					<div class="stars-background"></div>
+					<div class="rocket-fire"></div>
+					<div class="rocket"></div>
+					
+				
+						
+						<div class="loading">
+							<div class="line-box">
+								<div class="line"></div>
+							</div>
+						</div>
+						
+						<div 
+							class="loader">Loading Into Space<span 
+							class="loader__dot">.
+							</span><span
+							class="loader__dot_two">.
+							</span><span class="loader__dot_three">.</span>
+						</div>
+				</div>
+
+				<!-- ========================= LEARNING PAGE =========================== -->
+				
+
+				<div class="page-learning">
+					<div class="planetarium-button"></div>
+					<div class="overlay-page-learning"></div>
+					<div class="learning-page-alertbox">
+						<h3>Learning Complete!</h3>
+						<p>Great! You have learnt everything you need to know. Why not head back to the Planetarium to claim your learning badge and play some games to put your knowlege to the test. Are you ready to head back?</p>
+						<div class="learning-page-alertbox-btn">
+							<div class="btn-not-ready">Not just yet</div>
+							<div class="btn-ready">I'm ready</div>	
+						</div>			
+					</div>
+
+					<div class="planetarium-dome-icon"></div>
+					
+					<div class="planetarium-dome-icon-start"></div>
+					
+					<div class="planet planet-mercury">
+						<div class="planet-info">
+							Mercury
+						</div>
+					</div>
+					
+					<div class="planet planet-venus">
+						<div class="planet-info">
+							Venus
+						</div>
+					</div>
+
+					<div class="planet planet-earth">
+						<div class="planet-info">
+							Earth
+						</div>
+					</div>
+
+					<div class="planet planet-mars">
+						<div class="planet-info">
+							Mars
+						</div>
+					</div>
+
+					<div class="planet planet-jupiter">
+						<div class="planet-info">
+							Jupiter
+						</div>
+					</div>
+
+					<div class="planet planet-saturn">
+						<div class="planet-info">
+							Saturn
+						</div>
+					</div>
+
+					<div class="planet planet-uranus">
+						<div class="planet-info">
+							Uranus
+						</div>
+					</div>
+
+					<div class="planet planet-neptune">
+						<div class="planet-info">
+							Neptune
+						</div>
+					</div>
+
+					<div class="page-learning-instructions">
+						<p>Click on the planets to <br>find out more.</p>
+					</div>
+
+					<div class="page-learning-instructions2">
+						<p>Once you're ready just tap on the Planetarium and we will head back.</p>
+					</div>
+
+
+				</div>
+
+				
+				
+					<!-- ========================= LEARNING PAGE - MERCURY =========================== -->
+				
+				
+				
+				<div class="page-learning-mercury">
+					<div class="learning-page-planet"></div>
+					<div id="mercury"></div>
+					
+					<div class="green-background">
+						<div class="instructions">
+							<p>Tap the home button on the tablet when you are ready to learn about another planet.</p>		
+						</div>
+					</div>
+					<div class="learning-tablet-container">
+						<div class="learning-tablet"> </div>
+						
+						<div class="home-button-container">
+							<div class="home-button"></div>
+						</div>
+
+						<div class="tablet-screen-container">
+							<div class="facts-container">
+								<h2><u>Facts about Mercury</u></h2>
+							
+								<div class="facts">
+									<div class="fact1">
+										<h1>1</h1>								
+										<p>Mercury is the closest planet to the<span> Sun</span>.</p>
+									</div>
+
+									<div class="fact2">
+										<h1>2</h1>	
+										<p>It is the smallest planet and is made of rock.</p>
+									</div>
+
+									<div class="fact3">
+										<h1>3</h1>	
+										<p>It is so close to the Sun that it only takes 88 days for it to complete it's <span>orbit</span> and is much hotter than Earth.</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="keywords-container">
+								<h2><u>Key Words</u></h2>
+								
+								<div class="keyword1">
+									<p><span>Sun</span> - the star in our Solar System.</p>
+								</div>
+								
+								<div class="keyword2">
+									<p><span>Orbit</span> - the path that a planet takes around the Sun, or that a moon takes around a planet.</p>
+								</div>
+
+								
+							</div>
+						</div>
+					</div>
+					
+				</div>
+
+				<!-- ========================= LEARNING PAGE - VENUS =========================== -->
+
+				<div class="page-learning-venus">
+					<div class="learning-page-planet"></div>
+					<div id="venus"></div>
+					<div class="green-background">
+						<div class="instructions">
+							<p>Tap the home button on the tablet when you are ready to learn about another planet.</p>					
+						</div>
+					</div>
+					<div class="learning-tablet-container">
+						<div class="learning-tablet"> </div>
+						
+						<div class="home-button-container">
+							<div class="home-button"></div>
+						</div>
+
+						<div class="tablet-screen-container">
+							<div class="facts-container">
+								<h2><u>Facts about Venus</u></h2>
+							
+								<div class="facts">
+									<div class="fact1">
+										<h1>1</h1>								
+										<p>Venus is the hottest planet and has an average temperature of 460°C.</p>
+									</div>
+
+									<div class="fact2">
+										<h1>2</h1>	
+										<p>It takes 225 days to travel around the Sun.</p>
+									</div>
+
+									<div class="fact3">
+										<h1>3</h1>	
+										<p>Like Earth, Venus has an <span>atmosphere</span> (air) around it, but it is a lot thicker than Earth’s and Venus is permanently covered in clouds.</p>
+									</div>
+								</div>
+							</div>
+							
+
+							<div class="keywords-container">
+								<h2><u>Key Words</u></h2>
+								
+								<div class="keyword3">
+									<p><span>Atmosphere</span> - the layer of gas around a planet.</p>
+								</div>
+								
+
+								
+							</div>
+						</div>
+					</div>
+					
+				</div>
+
+				<!-- ========================= LEARNING PAGE - EARTH =========================== -->
+
+				<div class="page-learning-earth">
+					<div class="learning-page-planet"></div>
+					<div id="earth"></div>
+					<div class="green-background">
+						<div class="instructions">
+							<p>Tap the home button on the tablet when you are ready to learn about another planet.</p>					
+						</div>
+					</div>
+					<div class="learning-tablet-container">
+						<div class="learning-tablet"> </div>
+						
+						<div class="home-button-container">
+							<div class="home-button"></div>
+						</div>
+
+						<div class="tablet-screen-container">
+							<div class="facts-container">
+								<h2><u>Facts about Earth</u></h2>
+							
+								<div class="facts">
+									<div class="fact1">
+										<h1>1</h1>								
+										<p>Earth is made of rock and is the only planet where water is liquid. </p>
+									</div>
+
+									<div class="fact2">
+										<h1>2</h1>	
+										<p>Earth takes 365 days to travel around the Sun.</p>
+									</div>
+
+									<div class="fact3">
+										<h1>3</h1>	
+										<p>The sun's <span>gravity</span> keeps Earth in orbit around it, keeping us at a comfortable distance to enjoy the sun's light and warmth.</p>
+									</div>
+								</div>
+							</div>
+							
+							
+
+							<div class="keywords-container">
+								<h2><u>Key Words</u></h2>
+								
+								<div class="keyword3">
+									<p><span>Gravity</span> - the force that attracts a moon to a planet, or a planet to a star</p>
+								</div>		
+							</div>
+						</div>
+					</div>
+					
+				</div>
+
+				<!-- ========================= LEARNING PAGE - MARS =========================== -->
+
+				<div class="page-learning-mars">
+					<div class="learning-page-planet"></div>
+					<div id="mars"></div>
+					<div class="green-background">
+						<div class="instructions">
+							<p>Tap the home button on the tablet when you are ready to learn about another planet.</p>					
+						</div>
+					</div>
+					<div class="learning-tablet-container">
+						<div class="learning-tablet"> </div>
+						
+						<div class="home-button-container">
+							<div class="home-button"></div>
+						</div>
+						
+						<div class="tablet-screen-container">
+							<div class="facts-container">
+								<h2><u>Facts about Mars</u></h2>
+								
+								<div class="facts">
+									<div class="fact1">
+										<h1>1</h1>								
+										<p>Mars is reddish in colour and is sometimes called ‘The Red Planet’.</p>
+									</div>
+
+									<div class="fact2">
+										<h1>2</h1>	
+										<p> Mars takes 687 days to complete its <span>orbit</span> of the Sun and the average temperature is -63°C.</p>
+									</div>
+
+									<div class="fact3">
+										<h1>3</h1>	
+										<p>Mars is a little smaller than Earth, but a lot further out. It used to have an <span>atmosphere</span> like Earth and Venus, but it doesn’t have very much anymore. </p>
+									</div>
+								</div>
+							</div>
+							
+							
+
+							<div class="keywords-container">
+								<h2><u>Key Words</u></h2>
+								
+								<div class="keyword2">
+									<p><span>Orbit</span> - the path that a planet takes around the Sun, or that a moon takes around a planet.</p>
+								</div>
+								
+								<div class="keyword3">
+									<p><span>Atmosphere</span> - the layer of gas around a planet.</p>
+								</div>
+								
+							
+								
+							</div>
+						</div>
+					</div>
+					
+				</div>
+
+				<!-- ========================= LEARNING PAGE - JUPITER =========================== -->
+
+				<div class="page-learning-jupiter">
+					<div class="learning-page-planet"></div>
+					<div id="jupiter"></div>
+					<div class="green-background">
+						<div class="instructions">
+							<p>Tap the home button on the tablet when you are ready to learn about another planet.</p>					
+						</div>
+					</div>
+					<div class="learning-tablet-container">
+						<div class="learning-tablet"> </div>
+						
+						<div class="home-button-container">
+							<div class="home-button"></div>
+						</div>
+
+						<div class="tablet-screen-container">
+							<div class="facts-container">
+								<h2><u>Facts about Jupiter</u></h2>
+							
+								<div class="facts">
+									<div class="fact1">
+										<h1>1</h1>								
+										<p>Jupiter is the largest planet in the <span>Solar System</span>. You could fit 1,321 Earths inside Jupiter.</p>
+									</div>
+
+									<div class="fact2">
+										<h1>2</h1>	
+										<p>It is made of gas and is one of the four <span>‘gas giants’.</span> </p>
+									</div>
+
+									<div class="fact3">
+										<h1>3</h1>	
+										<p>Jupiter is five times as far from the Sun as the Earth is and takes almost 12 years to travel around the Sun.</p>
+									</div>
+								</div>
+							</div>
+							
+							
+
+							<div class="keywords-container">
+								<h2><u>Key Words</u></h2>
+								
+								<div class="keyword1">
+									<p><span>Solar System</span>– the Sun and the collection of stars.</p>
+								</div>
+								
+								<div class="keyword2">
+									<p><span>‘Gas giants’</span> - a large planet that has a solid core, but a very thick atmosphere. This means that most of the planet is made up of gas. </p>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					
+				</div>
+
+				<!-- ========================= LEARNING PAGE - SATURN =========================== -->
+
+				<div class="page-learning-saturn">
+					<div class="learning-page-planet"></div>
+					<div id="saturn"></div>
+					<div class="green-background">
+						<div class="instructions">
+							<p>Tap the home button on the tablet when you are ready to learn about another planet.</p>					
+						</div>
+					</div>
+					<div class="learning-tablet-container">
+						<div class="learning-tablet"> </div>
+						
+						<div class="home-button-container">
+							<div class="home-button"></div>
+						</div>
+
+						<div class="tablet-screen-container">
+							<div class="facts-container">
+								<h2><u>Facts about Saturn</u></h2>
+							
+								<div class="facts">
+									<div class="fact1">
+										<h1>1</h1>								
+										<p><span>Saturn</span> is the second largest planet in the Solar System and is another one of the <span>‘gas giants’</span> like Jupiter. </p>
+									</div>
+
+									<div class="fact2">
+										<h1>2</h1>	
+										<p>Saturn is famous for its rings which are made up of huge numbers of small lumps of ice and dust (mostly ice).
+									</div>
+
+									<div class="fact3">
+										<h1>3</h1>	
+										<p>It takes 29.5 years to travel around the Sun.</p>
+									</div>
+								</div>
+							</div>
+							
+							
+
+							<div class="keywords-container">
+								<h2><u>Key Words</u></h2>
+								
+								<div class="keyword1">
+									<p><span>Solar System</span> – the Sun and the collection of stars.</p>
+								</div>
+								
+								<div class="keyword1">
+									<p><span>‘Gas giants’</span> - a large planet that has a solid core, but a very thick atmosphere. This means that most of the planet is made up of gas. </p>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					
+				</div>
+
+				
+
+				<!-- ========================= LEARNING PAGE - URANUS =========================== -->
+
+				<div class="page-learning-uranus">
+					<div class="learning-page-planet"></div>
+					<div id="uranus"></div>
+					<div class="green-background">
+						<div class="instructions">
+							<p>Tap the home button on the tablet when you are ready to learn about another planet.</p>					
+						</div>
+					</div>
+					<div class="learning-tablet-container">
+						<div class="learning-tablet"> </div>
+						
+						<div class="home-button-container">
+							<div class="home-button"></div>
+						</div>
+
+						<div class="tablet-screen-container">
+							<div class="facts-container">
+								<h2><u>Facts about Uranus</u></h2>
+							
+								<div class="facts">
+									<div class="fact1">
+										<h1>1</h1>								
+										<p>Uranus is another of the <span>‘gas giants’</span>. </p>
+									</div>
+
+									<div class="fact2">
+										<h1>2</h1>	
+										<p>Uranus is the coldest planet, with an average temperature of -220°C.</p>
+									</div>
+
+									<div class="fact3">
+										<h1>3</h1>	
+										<p>Uranus takes 84 years to <span>orbit</span> the Sun.</p>
+									</div>
+								</div>
+							</div>
+							
+							
+
+							<div class="keywords-container">
+								<h2><u>Key Words</u></h2>
+								
+								<div class="keyword1">
+									<p><span>‘Gas giants’</span> - a large planet that has a solid core, but a very thick atmosphere. This means that most of the planet is made up of gas. </p>
+								</div>
+								
+								<div class="keyword3">
+									<p><span>Orbit</span> - the path that a planet takes around the Sun, or that a moon takes around a planet. </p>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					
+				</div>
+
+				<!-- ========================= LEARNING PAGE - NEPTUNE =========================== -->
+
+				<div class="page-learning-neptune">
+					<div class="learning-page-planet"></div>
+					<div id="neptune"></div>
+					<div class="green-background">
+						<div class="instructions">
+							<p>Tap the home button on the tablet when you are ready to learn about another planet.</p>					
+						</div>
+					</div>
+					<div class="learning-tablet-container">
+						<div class="learning-tablet"> </div>
+						
+						<div class="home-button-container">
+							<div class="home-button"></div>
+						</div>
+
+						<div class="tablet-screen-container">
+							<div class="facts-container">
+								<h2><u>Facts about Neptune</u></h2>
+							
+								<div class="facts">
+									<div class="fact1">
+										<h1>1</h1>								
+										<p>Neptune is the farthest planet from the Sun. It is 30 times as far from the sun as Earth.</p>
+									</div>
+
+									<div class="fact2">
+										<h1>2</h1>	
+										<p>It takes 165 years to travel around the Sun.</p>
+									</div>
+
+									<div class="fact3">
+										<h1>3</h1>	
+										<p>Neptune is the last of the four <span>‘gas giants’</span> and is 58 times the <span>volume</span> of Earth.</p>
+									</div>
+								</div>
+							</div>
+							
+							
+
+							<div class="keywords-container">
+								<h2><u>Key Words</u></h2>
+								
+								<div class="keyword3">
+									<p><span>‘Gas giants’</span> - a large planet that has a solid core, but a very thick atmosphere. This means that most of the planet is made up of gas.</p>
+								</div>
+								
+								<div class="keyword3">
+									<p><span>Volume</span> - The amount of space occupied.</p>
+								</div>
+								
+							</div>
+						</div>
+					</div>	
+				</div>
+
+				<!-- ========================= GAME 1 =========================== -->
+				<div class="page-game1">
+					<div class="correctanswers">Correct Answers</div>
+					<div id="answersAndFeedback">
+						<div id="answer1" class="answer-box">Answer 1</div>
+						<div id="answer2" class="answer-box">Answer 2</div>
+						<div id="answer3" class="answer-box">Answer 3</div>
+						<div id="answer4" class="answer-box">Answer 4</div>
+						<div id="answer5" class="answer-box">Answer 5</div>
+						<div id="answer6" class="answer-box">Answer 6</div>
+						<div id="answer7" class="answer-box">Answer 7</div>
+						<div id="answer8" class="answer-box">Answer 8</div>
+						<div id="answer9" class="answer-box">Pluto</div>
+						
+					</div>
+					
+					<div class="score">0</div>
+					
+				
+			
+					<div id="game1-alertbox">
+						<div id="question">Sample question here</div>
+						<div id="cluestamp">
+							<div id="cluestamp1">CLUE #1</div>
+							<div id="cluestamp2">CLUE #2</div>
+							<div id="cluestamp3">CLUE #3</div>
+						</div>
+						<div id="clues">
+							<div id="clue1">clue 1</div>
+							<div id="clue2">clue 2</div>
+							<div id="clue3">clue 3</div>
+						</div>
+						<div id="grey-background">
+							<div id="button-clue-one">Another Clue</div>
+							<div id="button-clue-two">Another Clue</div>
+							<div id="button-guess">Take a guess</div>
+						</div>
+					</div>
+
+					
+
+					<div class="mercury"></div>
+					<div class="venus"></div>
+					<div class="earth"></div>
+					<div class="mars"></div>
+					<div class="jupiter"></div>
+					<div class="saturn"></div>
+					<div class="uranus"></div>
+					<div class="neptune"></div>
+					<div class="pluto">I am no longer considered a planet</div>
+
+					<div class="planet-box-container">
+						<div class="planet-box mercury-box"></div>
+						<div class="planet-box venus-box"></div>
+						<div class="planet-box earth-box"></div>
+						<div class="planet-box mars-box"></div>
+						<div class="planet-box jupiter-box"></div>
+						<div class="planet-box saturn-box"></div>
+						<div class="planet-box uranus-box"></div>
+						<div class="planet-box neptune-box"></div>
+						<div class="planet-box pluto-box"></div>
+					</div>
+
+					<div class="overlay-startgame1"></div>
+					<div class="startgame1-page-alertbox">
+						<h3>Welcome to Mission 1!</h3>
+						<p>Welcome to guess the planet! You will have to guess the planet I am thinking of. I will give you some clues to help you take a guess. As soon as you know the answer, tap on the planet I am thinking of. To earn your Mission 1 badge, you must get three correct answers. Best of luck  !</p>
+						<p><b>*For a tougher challenge, guess with the fewest clues.*</b></p>
+						<div class="grey-background">
+							<div class="button-ready-startgame1">Start</div>
+						</div>
+					</div>
+
+					<div class="endgame1-page-alertbox">
+						<h3>Mission 1 Completed</h3>
+						<p>Well done! You have guessed correctly 3 times. It's time to head back to the Planetarium and claim your mission 1 badge!</p>
+				
+						<div class="grey-background">
+							<div class="button-ready-endgame1">Let's Go!</div>
+						</div>
+					</div>
+				
+					<div class="overlay-gameover"></div>
+					<div class="gameover-page-alertbox">
+						<h3>Mission 1 failed</h3>
+						<p>Unlucky space cadet. Why not visit space again to jog your memory? You can always come back to have another go.</p>
+						<div class="grey-background">
+							<div class="button-ready-gameover">Ok</div>
+						</div>
+					</div>
+		
+				</div>
+
+				
+
+				<!-- ========================= GAME 2 =========================== -->
+			
+				
+				<div class="page-game2">
+					<div class="overlay-startgame2"></div>
+					<div class="startgame2-page-alertbox">
+						<h3>Welcome to Mission 2!</h3>
+						<p>For this mission, you will need to drag all the key terms at the top to the correct defintions. Good luck!</p>
+						<div class="grey-background">
+							<div class="button-ready-startgame2">Start</div>
+						</div>
+					</div>
+				
+					<div class="drag-me-container">
+						<div id="drag1" class="drag-me orbit">Orbit</div>
+						<div id="drag2" class="drag-me atmosphere">Atmosphere</div>
+						<div id="drag3" class="drag-me gravity">Gravity</div>
+						<div id="drag4" class="drag-me solarsystem">Solar System</div>
+						<div id="drag5" class="drag-me sun">Sun</div>
+						<div id="drag6" class="drag-me gasgiants">‘Gas giants’</div>
+					</div>
+				
+				
+					<div class="target-container">
+						<div id="target1" class="target target-orbit"></div>
+						<div id="target2" class="target target-atmosphere"></div>
+						<div id="target3" class="target target-gravity"></div>
+						<div id="target4" class="target target-solarsystem"></div>
+						<div id="target5" class="target target-sun"></div>
+						<div id="target6" class="target target-gasgiants"></div>
+					</div>
+
+					<div class="def-container">
+						<div class="def def-orbit">the path that a planet takes around the Sun, or that a moon takes around a planet.</div>
+						<div class="def def-atmosphere">the layer of gas around a planet.</div>
+						<div class="def def-gravity">the force that attracts a moon to a planet, or a planet to a star.</div>
+						<div class="def def-solarsystem">the Sun and the collection of stars.</div>
+						<div class="def def-sun">the star in our Solar System.</div>
+						<div class="def def-gasgiants">a large planet that has a solid core, but a very thick atmosphere. This means that most of the planet is made up of gas.</div>
+					</div>
+
+					<div class="overlay-endgame2"></div>
+					<div class="endgame2-page-alertbox">
+						<h3>Mission 2 completed!</h3>
+						<p>Nice one! You have dragged the key terms to the correct definitions. The trip to space must have helped. It's time to head back to the Planetarium and claim your badge!</p>
+						<div class="grey-background">
+							<div class="button-ready-leave">Let's Go!</div>
+						</div>
+					</div>
+
+					
+				</div>
+
+
+				
+				
+			</div> <!-- end of pages -->
+
+
+			<!-- add any containers here that you don't want to animate when pages transition -->
+			<div class="persistent-stuff">
+				<div class="volume-button-toggle"></div>
+			</div>
+		</div> <!-- end of main container -->
+	</body>
+</html>
